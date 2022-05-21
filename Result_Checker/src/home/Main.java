@@ -1,6 +1,7 @@
 package home;
 
-/*      Created by Israk Ahmed on May 19 , 2022        */
+/*      Created by Israk Ahmed on May 19, 2022        */
+/*      Last Update on May 21, 2022      */
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,22 +42,87 @@ class Marks{
     ArrayList<Double> marks = new ArrayList<>();
     static ArrayList<Double> gpa = new ArrayList<>();
     ArrayList<Double> percents = new ArrayList<>();
+    ArrayList<String> grades = new ArrayList<>();
 
     Scanner marksInput = new Scanner(System.in);
 
     SortContents sortedContents;
 
-    /* taking the marks as input from user --- according to courses */
+    /* getting obtained gpa based on grades or marks */
 
     Marks(SortContents sortedContents) throws Exception{
         this.sortedContents = sortedContents;
-        System.out.println("Enter marks you achieved on the courses below");
+
+        System.out.println("With grades ? or with Marks ?");
+        System.out.println("1. Grades");
+        System.out.println("2. Marks");
+        System.out.print("Enter 1 or 2 : ");
+
+        int choice = marksInput.nextInt();
+
+        if(choice == 1){
+            convertGradesIntoGPA();
+        }
+
+        /* taking the Marks as input from user --- according to courses */
+        else if(choice == 2){
+            System.out.println("Enter marks you achieved on the courses below : \n");
+            for(String data : sortedContents.courseCodes){
+                System.out.print(data + " : ");
+                double mark = marksInput.nextDouble();
+                marks.add(mark);
+            }
+            convertMarksIntoGPA();
+        }
+
+    }
+
+    /* taking the Grades as input from user --- according to courses */
+    void convertGradesIntoGPA(){
+        System.out.println("Enter grades you achieved on the courses below : \n");
         for(String data : sortedContents.courseCodes){
             System.out.print(data + " : ");
-            double mark = marksInput.nextDouble();
-            marks.add(mark);
+            String grade = marksInput.next();
+            grades.add(grade);
         }
-        convertMarksIntoGPA();
+
+        /* finding the deserving gpa according to grades */
+        for(String grade : grades){
+            if(grade.equals("A+")){
+                gpa.add(4.0);
+            }
+            else if(grade.equals("A")){
+                gpa.add(3.75);
+            }
+            else if(grade.equals("A-")){
+                gpa.add(3.5);
+            }
+            else if(grade.equals("B+")){
+                gpa.add(3.25);
+            }
+            else if(grade.equals("B")){
+                gpa.add(3.0);
+            }
+            else if(grade.equals("B-")){
+                gpa.add(2.75);
+            }
+            else if(grade.equals("C+")){
+                gpa.add(2.5);
+            }
+            else if(grade.equals("C")){
+                gpa.add(2.25);
+            }
+            else if(grade.equals("D")){
+                gpa.add(2.0);
+            }
+            else if(grade.equals("F")){
+                gpa.add(0.0);
+            }
+            else{
+                gpa.add(0.0);
+            }
+        }
+
     }
 
     /* getting percentage on total marks */
@@ -180,7 +246,7 @@ class Files{
 class Menu{
     /* Menu is shown from here , it gives many options to user to choose. */
     Menu(){
-        System.out.println("W E L C O M E   M A T E"); // this is the very first line which will be shown as output.
+        System.out.println("\n*****   W E L C O M E   M A T E   *****\n"); // this is the very first line which will be shown as output.
     }
     void choiceMenu(){
         /* this is the main menu of this program. */
@@ -225,13 +291,15 @@ public class Main {
 
                 double cGPA = calculation.calculateCGPA();
 
+                System.out.println("\n----");
                 System.out.println("Your achieved CGPA is : " + cGPA);   // final output
+                System.out.println("----\n");
 
                 menu.continuationMenu();    /* checking if the user wants to continue or not */
                 int choice = inputTaker.nextInt();
 
                 if(choice == 2){
-                    System.out.println("G O O D B Y E   M A T E");
+                    System.out.println("\n*****   G O O D B Y E   M A T E   *****\n");
 
                     menu.exit();      // calling exit
                 }
