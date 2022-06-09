@@ -2,11 +2,8 @@
 
 ### Description:
 This program calculates the **GPA** of semesters based on the
-
 grades that a student achieved. This is only applicable for
-
 the students of the session **2019-20** of **Rajshahi University**
-
 or the students who have the same syllabus.
 
 
