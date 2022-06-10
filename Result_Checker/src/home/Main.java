@@ -38,41 +38,19 @@ class Calculation {
 
 class Marks{
 
-    ArrayList<Double> marks = new ArrayList<>();
     static ArrayList<Double> gpa = new ArrayList<>();
-    ArrayList<Double> percents = new ArrayList<>();
     ArrayList<String> grades = new ArrayList<>();
 
     Scanner marksInput = new Scanner(System.in);
 
     SortContents sortedContents;
 
-    /* getting obtained gpa based on grades or marks */
+    /* getting obtained gpa based on grades */
 
     Marks(SortContents sortedContents) throws Exception{
         this.sortedContents = sortedContents;
 
-        System.out.println("With grades ? or with Marks ?");
-        System.out.println("1. Grades");
-        System.out.println("2. Marks");
-        System.out.print("Enter 1 or 2 : ");
-
-        int choice = marksInput.nextInt();
-
-        if(choice == 1){
-            convertGradesIntoGPA();
-        }
-
-        /* taking the Marks as input from user --- according to courses */
-        else if(choice == 2){
-            System.out.println("Enter marks you achieved on the courses below : \n");
-            for(String data : sortedContents.courseCodes){
-                System.out.print(data + " : ");
-                double mark = marksInput.nextDouble();
-                marks.add(mark);
-            }
-            convertMarksIntoGPA();
-        }
+        convertGradesIntoGPA();
 
     }
 
@@ -115,58 +93,6 @@ class Marks{
                 gpa.add(2.0);
             }
             else if(grade.equals("F")){
-                gpa.add(0.0);
-            }
-            else{
-                gpa.add(0.0);
-            }
-        }
-
-    }
-
-    /* getting percentage on total marks */
-
-    void convertMarksIntoGPA(){
-
-        for(int i = 0; i < sortedContents.courseCredits.size(); i++){
-            int credit = sortedContents.courseCredits.get(i);
-            double mark = marks.get(i);
-            double totalMark = credit * 25;
-            double percentage = (mark * 100) / totalMark;
-            percents.add(percentage);
-        }
-
-        /* finding the deserving gpa according to marks */
-
-        for(double percent : percents){
-            if(percent >= 80){
-                gpa.add(4.0);
-            }
-            else if(percent >= 75 && percent < 80){
-                gpa.add(3.75);
-            }
-            else if(percent >= 70 && percent < 75){
-                gpa.add(3.5);
-            }
-            else if(percent >= 65 && percent < 70){
-                gpa.add(3.25);
-            }
-            else if(percent >= 60 && percent < 65){
-                gpa.add(3.0);
-            }
-            else if(percent >= 55 && percent < 60){
-                gpa.add(2.75);
-            }
-            else if(percent >= 50 && percent < 55){
-                gpa.add(2.5);
-            }
-            else if(percent >= 45 && percent < 50){
-                gpa.add(2.25);
-            }
-            else if(percent >= 40 && percent < 45){
-                gpa.add(2.0);
-            }
-            else if(percent < 40){
                 gpa.add(0.0);
             }
             else{
