@@ -1,7 +1,6 @@
 package home;
 
-/*      Created by Israk Ahmed on May 19, 2022        */
-/*      Last Update on May 21, 2022      */
+/*      Created by Israk Ahmed on May 19 , 2022        */
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,10 +1,26 @@
-1EEE1111
-1EEE1112
-1CSE1151
-1CSE1152
-1CE1152
-1PHY1121
-1PHY1122
-1MATH1131
-1ENG1111
-1ENG1112
+1Technical and Communicative English  [ ENG1111 ]
+1Differential and Integral Calculus  [ MATH1121 ]
+1Chemistry  [ CHEM1121 ]
+1Basic Electronics  [ EEE1131 ]
+1Basic Electronics Lab  [ EEE1132 ]
+1Introduction to Computer Systems  [ CSE1111 ]
+1Computer Maintenance and Engineering Drawing Lab  [ CSE1112 ]
+1Structural Programming Language  [ CSE1121 ]
+1Structural Programming Language Lab  [ CSE1122 ]
+2Engineering Economics  [ ECON1211 ]
+2Statistics for Engineers  [ STAT1211 ]
+2Co-ordinate Geometry , Vector analysis and Complex Variable  [ MATH1221 ]
+2Basic Electricity and Electrical Circuits  [ PHY1211 ]
+2Introduction to Digital Electronics  [ CSE1211 ]
+2Introduction to Digital Electronics Lab  [ CSE1212 ]
+2Object Oriented Programming  [ CSE1221 ]
+2Object Oriented Programming Lab  [ CSE1222 ]
+3Industrial Management and Accountancy  [ ACCO2111 ]
+3Theory of Statistics  [ STAT2111 ]
+3Differential Equation and Optimization  [ MATH2131 ]
+3Digital System Design  [ CSE2111 ]
+3Digital System Design Lab  [ CSE2112 ]
+3Data Structure  [ CSE2121 ]
+3Data Structure Lab  [ CSE2122 ]
+3Discrete Mathematics  [ CSE2131 ]
+3Writing Professional Code Lab  [ CSE2142 ]
