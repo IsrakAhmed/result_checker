@@ -16,8 +16,11 @@ public class UI {
     JLabel label,label2,label3,label4,label5,label6;
     FileContents fileContents;
     int user;
+    Image icon;
     UI() throws Exception {
         frame = new JFrame("Result Checker");
+        icon = Toolkit.getDefaultToolkit().getImage("icon.png");
+        frame.setIconImage(icon);
         frame.setSize(480,480);
         frame.setLocationRelativeTo(null);
         frame.setLayout(null);
@@ -106,6 +109,7 @@ public class UI {
     public void home(int roll){
         user = roll;
         homeFrame = new JFrame("Result Checker");
+        homeFrame.setIconImage(icon);
         homeFrame.setSize(480,480);
         homeFrame.setLocationRelativeTo(null);
         homeFrame.setLayout(null);
@@ -167,6 +171,7 @@ public class UI {
     int index;
     public void gradeInput(SortContents sortedContents){
         gradeFrame = new JFrame("Result Checker");
+        gradeFrame.setIconImage(icon);
         gradeFrame.setSize(480,480);
         gradeFrame.setLocationRelativeTo(null);
         gradeFrame.setLayout(null);
@@ -279,6 +284,7 @@ public class UI {
 
     public void result(double cGPA){
         resultFrame = new JFrame("Result Checker");
+        resultFrame.setIconImage(icon);
         resultFrame.setSize(480,480);
         resultFrame.setLocationRelativeTo(null);
         resultFrame.setLayout(null);
