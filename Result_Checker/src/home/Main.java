@@ -3,6 +3,7 @@ package home;
 /*      Created by Israk Ahmed on May 19 , 2022        */
 
 import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -29,7 +30,8 @@ class Calculation {
         for(int i = 0; i < courseCredits.size(); i++){
             double temp = courseCredits.get(i) * gpa.get(i);
             cgpa = cgpa + temp;
-        }
+
+        }//2037820103
         cgpa = cgpa / total_credits;  /* final line of calculation */
 
         return cgpa;
@@ -39,9 +41,7 @@ class Calculation {
 class Marks{
 
     static ArrayList<Double> gpa = new ArrayList<>();
-    ArrayList<String> grades = new ArrayList<>();
-
-    Scanner marksInput = new Scanner(System.in);
+    public static ArrayList<String> grades = new ArrayList<>();
 
     SortContents sortedContents;
 
@@ -49,21 +49,14 @@ class Marks{
 
     Marks(SortContents sortedContents) throws Exception{
         this.sortedContents = sortedContents;
-
         convertGradesIntoGPA();
-
     }
 
     /* taking the Grades as input from user --- according to courses */
     void convertGradesIntoGPA(){
-        System.out.println("Enter grades you achieved on the courses below : \n");
-        for(String data : sortedContents.courseCodes){
-            System.out.print(data + " : ");
-            String grade = marksInput.next();
-            grades.add(grade);
-        }
 
         /* finding the deserving gpa according to grades */
+        System.out.println("error" + " size " + grades.size());
         for(String grade : grades){
             if(grade.equals("A+")){
                 gpa.add(4.0);
@@ -99,7 +92,9 @@ class Marks{
                 gpa.add(0.0);
             }
         }
+
     }
+
 }
 
 class SortContents extends FileContents{
@@ -141,15 +136,40 @@ class FileContents{
 
     ArrayList<String> fileContents_1 = new ArrayList<>();
     ArrayList<Integer> fileContents_2 = new ArrayList<>();
+    ArrayList<Integer> allUsers = new ArrayList<>();
+    Files files;
+    PrintWriter writer;
 
     FileContents() throws Exception {
-        Files files = new Files();  // instance of the class Files.
+        files = new Files();  // instance of the class Files.
 
         while(files.course_Codes.hasNextLine()){
             String temp_1 = files.course_Codes.nextLine();
             int temp_2 = files.course_Credits.nextInt();
+
             fileContents_1.add(temp_1);
             fileContents_2.add(temp_2);
+        }
+
+        while(files.registered_Users.hasNextInt()){
+            int temp_3 = files.registered_Users.nextInt();
+            allUsers.add(temp_3);
+        }
+    }
+    void addUser(int roll){
+        allUsers.add(roll);
+        try{
+            writer = new PrintWriter(files.registeredUsers);
+            int iterator = 0;
+            while(iterator < allUsers.size()){
+
+                writer.println(allUsers.get(iterator));
+
+                iterator++;
+            }
+            writer.close();
+        }catch(Exception e){
+            System.out.println(e);
         }
     }
 }
@@ -158,82 +178,34 @@ class Files{
 
     File courseCodes = new File("courseCodes.txt"); // this file contains all the course codes in a sequential order according to syllabus.
     File courseCredits = new File("courseCredits.txt"); // this file contains all the credit points of the courses in a sequential order according to syllabus.
+    File registeredUsers = new File("RegisteredUsers.txt");
 
     Scanner course_Codes;
     Scanner course_Credits;
+    Scanner registered_Users;
 
-    Files() throws Exception{
-        course_Codes = new Scanner(courseCodes);
-        course_Credits = new Scanner(courseCredits);
-    }
-}
-
-class Menu{
-    /* Menu is shown from here , it gives many options to user to choose. */
-    Menu(){
-        System.out.println("\n*****   W E L C O M E   M A T E   *****\n"); // this is the very first line which will be shown as output.
-    }
-    void choiceMenu(){
-        /* this is the main menu of this program. */
-        System.out.println("Which semester result you want to see ? ");
-        System.out.print("Semester : ");
-    }
-
-    void continuationMenu(){
-        /* if anyone wants to see more results they continue without rerunning */
-        System.out.println("Do you want to continue ?");
-        System.out.println("1. Yes");
-        System.out.println("2. No");
-        System.out.print("Enter 1 or 2 : ");
-    }
-    void exit(){
-        System.exit(0);     /* E X I T */
+    Files(){
+        try{
+            course_Codes = new Scanner(courseCodes);
+            course_Credits = new Scanner(courseCredits);
+            registered_Users = new Scanner(registeredUsers);
+        }catch(Exception e){
+            System.out.println(e);
+        }
     }
 }
 
 public class Main {
+    static UI ui;
     public static void main(String[] args) {
 
         try {
-            Menu menu = new Menu();     // instance of the class Menu.
-
-            label:
-            while(true){
-
-                menu.choiceMenu();    // the menu is showing here.
-
-                Scanner inputTaker = new Scanner(System.in);
-                int thSemester = inputTaker.nextInt(); // taking the choice of the user
-
-                if(thSemester < 1 || thSemester > 8){
-                    System.out.println("Enter a valid number");
-                    continue label;
-                }
-
-                SortContents sortedContents = new SortContents(thSemester);
-                Marks marks = new Marks(sortedContents);
-                Calculation calculation = new Calculation();
-
-                double cGPA = calculation.calculateCGPA();
-
-                System.out.println("\n----");
-                System.out.println("Your achieved CGPA is : " + cGPA);   // final output
-                System.out.println("----\n");
-
-                menu.continuationMenu();    /* checking if the user wants to continue or not */
-                int choice = inputTaker.nextInt();
-
-                if(choice == 2){
-                    System.out.println("\n*****   G O O D B Y E   M A T E   *****\n");
-
-                    menu.exit();      // calling exit
-                }
-
-            }
+            ui = new UI();
         }
         catch (Exception e){
             System.out.println("Something is wrong"); // if any exception is thrown this line will print
         }
 
     }
-}
+
+    }
