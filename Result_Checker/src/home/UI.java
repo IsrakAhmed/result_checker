@@ -224,7 +224,6 @@ public class UI {
 
     public void clickedAdd(ActionEvent clicked){
         index = courseBox.getSelectedIndex();
-        System.out.println("in " + index);
         try{
             grades.remove(index);
         }catch (Exception e){

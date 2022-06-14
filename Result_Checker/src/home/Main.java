@@ -56,7 +56,6 @@ class Marks{
     void convertGradesIntoGPA(){
 
         /* finding the deserving gpa according to grades */
-        System.out.println("error" + " size " + grades.size());
         for(String grade : grades){
             if(grade.equals("A+")){
                 gpa.add(4.0);
