@@ -13,8 +13,12 @@ or the students who have the same syllabus.
 > * Grades can be from **F** to **A+**
 
 > * Students can choose the semester for which they want to see
-their GPA. Here 1 represents first semester, 2 represents second, 
-3 represents third and 4 to 8 for fourth to eighth semester.
+their GPA. Here 1.1 represents first semester, 1.2 represents second, 
+2.1 represents third and 2.2 to 4.2 for fourth to eighth semester.
+
+
+### Check the executable file
+> https://drive.google.com/drive/folders/147yhJN3lgiYfnBYnxBSs0Ljg1LpKU16Y?usp=sharing
 
 
 
