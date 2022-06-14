@@ -31,7 +31,7 @@ class Calculation {
             double temp = courseCredits.get(i) * gpa.get(i);
             cgpa = cgpa + temp;
 
-        }//2037820103
+        }
         cgpa = cgpa / total_credits;  /* final line of calculation */
 
         return cgpa;
