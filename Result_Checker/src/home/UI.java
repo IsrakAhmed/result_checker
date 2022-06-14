@@ -149,11 +149,19 @@ public class UI {
     }
 
     public void clickedLogOut(ActionEvent clicked){
-        JOptionPane.showMessageDialog(homeFrame,"Logging Out");
-        homeFrame.setVisible(false);
-        gradeFrame.setVisible(false);
-        resultFrame.setVisible(false);
-        frame.setVisible(true);
+        try{
+            JOptionPane.showMessageDialog(homeFrame,"Logging Out");
+            homeFrame.setVisible(false);
+            gradeFrame.setVisible(false);
+            resultFrame.setVisible(false);
+            frame.setVisible(true);
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        finally {
+            frame.setVisible(true);
+        }
+
     }
 
     int index;
