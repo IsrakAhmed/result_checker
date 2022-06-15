@@ -26,5 +26,3 @@ their GPA. Here 1.1 represents first semester, 1.2 represents second,
 
 **Developed by**
 > Israk Ahmed
-
-> Contact: israkahmed7@gmail.com
