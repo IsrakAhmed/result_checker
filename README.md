@@ -18,9 +18,11 @@ their GPA. Here 1.1 represents first semester, 1.2 represents second,
 
 
 ### Check the executable file
-> https://drive.google.com/drive/folders/147yhJN3lgiYfnBYnxBSs0Ljg1LpKU16Y?usp=sharing
+> [Here](https://drive.google.com/drive/folders/1QP5Wfr3OWMtVW5aZlv-UGqHO2T9m31SQ?usp=sharing)
+**Read** the **readme.txt** first there.
 
 
 
 **Developed by**
 > Israk Ahmed
+israkahmed7@gmail.com
