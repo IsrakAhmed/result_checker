@@ -18,7 +18,7 @@ their GPA. Here 1.1 represents first semester, 1.2 represents second,
 
 
 ### Check the executable file
-> [Link](https://drive.google.com/drive/folders/1QP5Wfr3OWMtVW5aZlv-UGqHO2T9m31SQ?usp=sharing)
+> [Executable File](https://drive.google.com/drive/folders/1QP5Wfr3OWMtVW5aZlv-UGqHO2T9m31SQ?usp=sharing)
 
 > **Read** the **readme.txt** first there.
 
