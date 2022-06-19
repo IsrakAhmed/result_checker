@@ -23,6 +23,9 @@ their GPA. Here 1.1 represents first semester, 1.2 represents second,
 > **Read** the **readme.txt** first there.
 
 
+### Know more about [BMI](https://www.who.int/europe/news-room/fact-sheets/item/a-healthy-lifestyle---who-recommendations)
+
+
 
 **Developed by**
 > Israk Ahmed
