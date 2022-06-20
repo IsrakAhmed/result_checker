@@ -243,7 +243,47 @@ public class UI {
             System.out.println(e);
         }
         finally {
-            grades.add(index,grade.getText());
+            addGrade();
+        }
+    }
+
+    public void addGrade(){
+        try{
+            if(grade.getText().equals("A+")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("A")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("A-")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("B+")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("B")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("B-")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("C+")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("C")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("D")){
+                grades.add(index,grade.getText());
+            }
+            else if(grade.getText().equals("F")){
+                grades.add(index,grade.getText());
+            }
+            else{
+                throw new RuntimeException();
+            }
+        }catch(Exception exception){
+            JOptionPane.showMessageDialog(gradeFrame,"Invalid Grade");
         }
     }
 
