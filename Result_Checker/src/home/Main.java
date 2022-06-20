@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 class Calculation {
     /* Semesterly calculation is done here. */
-    double cgpa = 0;
+    double cgpa;
     ArrayList<Double> gpa;
     ArrayList<Integer> courseCredits;
 
@@ -19,6 +19,8 @@ class Calculation {
     }
 
     double calculateCGPA(){
+
+        cgpa = 0;
 
         /* calculating the CGPA on the basis of all facts */
 
