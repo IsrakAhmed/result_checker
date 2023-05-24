@@ -13,8 +13,8 @@ class Calculation {
     ArrayList<Double> gpa;
     ArrayList<Integer> courseCredits;
 
-    Calculation(){
-        gpa = Marks.gpa;
+    Calculation(Marks marks){
+        gpa = marks.gpa;
         courseCredits = SortContents.courseCredits;
     }
 
@@ -42,14 +42,14 @@ class Calculation {
 
 class Marks{
 
-    static ArrayList<Double> gpa = new ArrayList<>();
+    ArrayList<Double> gpa = new ArrayList<>();
     public static ArrayList<String> grades = new ArrayList<>();
 
     SortContents sortedContents;
 
     /* getting obtained gpa based on grades */
 
-    Marks(SortContents sortedContents) throws Exception{
+    Marks(SortContents sortedContents){
         this.sortedContents = sortedContents;
         convertGradesIntoGPA();
     }
@@ -107,7 +107,7 @@ class SortContents extends FileContents{
 
     int thSemester;
 
-    SortContents(int thSemester) throws Exception{
+    SortContents(int thSemester) {
         this.thSemester = thSemester;
 
         for(String data: fileContents_1) {
@@ -141,7 +141,7 @@ class FileContents{
     Files files;
     PrintWriter writer;
 
-    FileContents() throws Exception {
+    FileContents() {
         files = new Files();  // instance of the class Files.
 
         while(files.course_Codes.hasNextLine()){

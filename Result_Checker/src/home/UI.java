@@ -11,14 +11,16 @@ import static home.Marks.grades;
 
 public class UI {
     JFrame frame,homeFrame,gradeFrame,resultFrame;
-    JButton signUP,logIN,next,logOut,add,go;
+    JButton signUP,logIN,next,logOut,add,go,back;
     JTextField roll,grade;
     JLabel label,label2,label3,label4,label5,label6;
     FileContents fileContents;
     int user;
     Image icon;
+    String currentFrame;
     UI() throws Exception {
         frame = new JFrame("Result Checker");
+        currentFrame = "frame";
         icon = Toolkit.getDefaultToolkit().getImage("icon.png");
         frame.setIconImage(icon);
         frame.setSize(480,480);
@@ -109,6 +111,7 @@ public class UI {
     public void home(int roll){
         user = roll;
         homeFrame = new JFrame("Result Checker");
+        currentFrame = "homeFrame";
         homeFrame.setIconImage(icon);
         homeFrame.setSize(480,480);
         homeFrame.setLocationRelativeTo(null);
@@ -164,6 +167,7 @@ public class UI {
         }
         finally {
             frame.setVisible(true);
+            clear();
         }
 
     }
@@ -171,6 +175,7 @@ public class UI {
     int index;
     public void gradeInput(SortContents sortedContents){
         gradeFrame = new JFrame("Result Checker");
+        currentFrame = "gradeFrame";
         gradeFrame.setIconImage(icon);
         gradeFrame.setSize(480,480);
         gradeFrame.setLocationRelativeTo(null);
@@ -217,15 +222,21 @@ public class UI {
         go.setForeground(Color.white);
         go.addActionListener(this::clickedGo);
 
-        logOut = new JButton("Log Out");
+        /* logOut = new JButton("Log Out");
         logOut.setBounds(220,365,150,35);
         logOut.setBackground(Color.darkGray);
         logOut.setForeground(Color.white);
-        logOut.addActionListener(this::clickedLogOut);
+        logOut.addActionListener(this::clickedLogOut); */
+
+        back = new JButton("Back");
+        back.setBounds(220,365,150,35);
+        back.setBackground(Color.darkGray);
+        back.setForeground(Color.white);
+        back.addActionListener(this::clickedBack);
 
 
         gradeFrame.add(label4); gradeFrame.add(label5);
-        gradeFrame.add(logOut); gradeFrame.add(courseBox);
+        gradeFrame.add(back); gradeFrame.add(courseBox);
         gradeFrame.add(add); gradeFrame.add(grade);
         gradeFrame.add(go);
 
@@ -239,6 +250,7 @@ public class UI {
         index = courseBox.getSelectedIndex();
         try{
             grades.remove(index);
+            System.out.println("Index " + index + " removed.");
         }catch (Exception e){
             System.out.println(e);
         }
@@ -251,33 +263,43 @@ public class UI {
         try{
             if(grade.getText().equals("A+")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("A")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("A-")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("B+")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("B")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("B-")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("C+")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("C")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("D")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else if(grade.getText().equals("F")){
                 grades.add(index,grade.getText());
+                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
             }
             else{
                 throw new RuntimeException();
@@ -292,7 +314,7 @@ public class UI {
         try{
             if(grades.size() == totalCourse){
                 Marks marks = new Marks(sortedContents_2);
-                Calculation calculation = new Calculation();
+                Calculation calculation = new Calculation(marks);
                 double cGPA = calculation.calculateCGPA();
 
                 result(cGPA);
@@ -304,6 +326,14 @@ public class UI {
             else{
                 JOptionPane.showMessageDialog(gradeFrame,"Invalid Grades");
             }
+        }catch (Exception e){
+            System.out.println(e);
+        }
+    }
+
+    public void clear(){
+        try{
+            grades.clear();
         }catch (Exception e){
             System.out.println(e);
         }
@@ -324,6 +354,7 @@ public class UI {
 
     public void result(double cGPA){
         resultFrame = new JFrame("Result Checker");
+        currentFrame = "resultFrame";
         resultFrame.setIconImage(icon);
         resultFrame.setSize(480,480);
         resultFrame.setLocationRelativeTo(null);
@@ -338,6 +369,12 @@ public class UI {
         label6.setForeground(Color.red);
 
 
+        back = new JButton("Back");
+        back.setBounds(155,200,150,35);
+        back.setBackground(Color.darkGray);
+        back.setForeground(Color.white);
+        back.addActionListener(this::clickedBack);
+
         logOut = new JButton("Log Out");
         logOut.setBounds(155,250,150,35);
         logOut.setBackground(Color.darkGray);
@@ -345,14 +382,38 @@ public class UI {
         logOut.addActionListener(this::clickedLogOut);
 
 
-        resultFrame.add(label4); resultFrame.add(logOut);
-        resultFrame.add(label6);
+        resultFrame.add(label4); resultFrame.add(back);
+        resultFrame.add(logOut); resultFrame.add(label6);
 
         frame.setVisible(false);
         homeFrame.setVisible(false);
         gradeFrame.setVisible(false);
         resultFrame.setVisible(true);
         resultFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void clickedBack(ActionEvent clicked){
+        try{
+
+            frame.setVisible(false);
+
+            if(currentFrame.equals("gradeFrame")){
+                currentFrame = "homeFrame";
+                gradeFrame.setVisible(false);
+                resultFrame.setVisible(false);
+                homeFrame.setVisible(true);
+            }
+            else if(currentFrame.equals("resultFrame")) {
+                currentFrame ="gradeFrame";
+                resultFrame.setVisible(false);
+                homeFrame.setVisible(false);
+                gradeFrame.setVisible(true);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+            System.out.println("Current Frame : " + currentFrame);
+            frame.setVisible(true);
+        }
     }
 
 }
