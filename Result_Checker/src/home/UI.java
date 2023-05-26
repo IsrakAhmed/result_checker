@@ -2,23 +2,23 @@ package home;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
+import java.util.ArrayList;
 
-
-import static home.Marks.grades;
 
 public class UI {
     JFrame frame,homeFrame,gradeFrame,resultFrame;
-    JButton signUP,logIN,next,logOut,add,go,back;
+    JButton signUP,logIN,next,logOut,add,go,back,clear;
     JTextField roll,grade;
     JLabel label,label2,label3,label4,label5,label6;
     FileContents fileContents;
     int user;
+    int totalCourse;
     Image icon;
     String currentFrame;
-    UI() throws Exception {
+    int countGrade = 0;
+    ArrayList<String> grades;
+    UI(){
         frame = new JFrame("Result Checker");
         currentFrame = "frame";
         icon = Toolkit.getDefaultToolkit().getImage("icon.png");
@@ -148,8 +148,6 @@ public class UI {
         homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    int totalCourse;
-
     public void clickedNext(ActionEvent clicked){
         int thSem = comboBox.getSelectedIndex() + 1;
         start(thSem);
@@ -163,16 +161,16 @@ public class UI {
             resultFrame.setVisible(false);
             frame.setVisible(true);
         }catch(Exception e){
-            System.out.println(e);
+            //System.out.println(e);
         }
         finally {
             frame.setVisible(true);
             clear();
         }
-
     }
 
     int index;
+    String[] comboArr,tempCombo;
     public void gradeInput(SortContents sortedContents){
         gradeFrame = new JFrame("Result Checker");
         currentFrame = "gradeFrame";
@@ -190,13 +188,17 @@ public class UI {
 
         totalCourse = sortedContents.courseCodes.size();
 
-        String[] comboArr = new String[totalCourse];
+        grades = new ArrayList<>();
+
+        comboArr = new String[totalCourse];
 
         int i = 0;
         for(String data : sortedContents.courseCodes){
             comboArr[i] = data;
             i++;
         }
+
+        tempCombo = comboArr.clone();
 
         courseBox = new JComboBox<>(comboArr);
         courseBox.setBounds(30, 125,400,30);
@@ -216,17 +218,17 @@ public class UI {
         add.setForeground(Color.white);
         add.addActionListener(this::clickedAdd);
 
+        clear = new JButton("Clear");
+        clear.setBounds(290,165,100,20);
+        clear.setBackground(Color.darkGray);
+        clear.setForeground(Color.white);
+        clear.addActionListener(this::clickedClear);
+
         go = new JButton("Result");
         go.setBounds(80,365,85,35);
         go.setBackground(Color.darkGray);
         go.setForeground(Color.white);
         go.addActionListener(this::clickedGo);
-
-        /* logOut = new JButton("Log Out");
-        logOut.setBounds(220,365,150,35);
-        logOut.setBackground(Color.darkGray);
-        logOut.setForeground(Color.white);
-        logOut.addActionListener(this::clickedLogOut); */
 
         back = new JButton("Back");
         back.setBounds(220,365,150,35);
@@ -238,7 +240,7 @@ public class UI {
         gradeFrame.add(label4); gradeFrame.add(label5);
         gradeFrame.add(back); gradeFrame.add(courseBox);
         gradeFrame.add(add); gradeFrame.add(grade);
-        gradeFrame.add(go);
+        gradeFrame.add(go); gradeFrame.add(clear);
 
         frame.setVisible(false);
         homeFrame.setVisible(false);
@@ -246,75 +248,105 @@ public class UI {
         gradeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    String removedGrade;
+    boolean isGradeRemoved = false;
     public void clickedAdd(ActionEvent clicked){
         index = courseBox.getSelectedIndex();
+
         try{
+            removedGrade = grades.get(index);
             grades.remove(index);
-            System.out.println("Index " + index + " removed.");
+            countGrade--;
+            isGradeRemoved = true;
+            System.out.println("Grade : " + removedGrade + " removed from index : " + index);
         }catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
         }
         finally {
             addGrade();
         }
     }
 
+    public void clickedClear(ActionEvent clicked){
+        clear();
+    }
+
+    public void added(){
+        countGrade++;
+
+        System.out.println("Grade : " + grades.get(index) + " added in Index " + index);
+
+        tempCombo[index] = courseBox.getSelectedItem() + "   ✅";
+
+        gradeFrame.remove(courseBox);
+
+        courseBox = new JComboBox<>(tempCombo);
+        courseBox.setBounds(30, 125,400,30);
+        gradeFrame.add(courseBox);
+    }
+
     public void addGrade(){
         try{
             if(grade.getText().equals("A+")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("A")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("A-")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("B+")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("B")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("B-")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("C+")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("C")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("D")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else if(grade.getText().equals("F")){
                 grades.add(index,grade.getText());
-                System.out.println("Grade " + grades.get(index) + " added in Index " + index);
+                added();
             }
             else{
                 throw new RuntimeException();
             }
         }catch(Exception exception){
             JOptionPane.showMessageDialog(gradeFrame,"Invalid Grade");
+            if(isGradeRemoved){
+                grades.add(index,removedGrade);
+                countGrade++;
+                System.out.println("Grade : " + removedGrade + " restored in Index : " + index);
+                isGradeRemoved = false;
+            }
         }
     }
 
     SortContents sortedContents_2;
     public void clickedGo(ActionEvent clicked) {
         try{
-            if(grades.size() == totalCourse){
-                Marks marks = new Marks(sortedContents_2);
-                Calculation calculation = new Calculation(marks);
+            if(countGrade == totalCourse){
+                Marks marks = new Marks(grades);
+                Calculation calculation = new Calculation(sortedContents_2,marks);
                 double cGPA = calculation.calculateCGPA();
 
                 result(cGPA);
@@ -327,15 +359,37 @@ public class UI {
                 JOptionPane.showMessageDialog(gradeFrame,"Invalid Grades");
             }
         }catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
         }
     }
 
     public void clear(){
         try{
             grades.clear();
+            countGrade = 0;
+
+            gradeFrame.remove(courseBox);
+            tempCombo = comboArr.clone();
+
+            courseBox = new JComboBox<>(comboArr);
+            courseBox.setBounds(30, 125,400,30);
+
+            gradeFrame.remove(grade);
+            grade = new JTextField("F to A+");
+            grade.setBounds(86,312,70,25);
+            grade.addMouseListener(new MouseAdapter(){
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    grade.setText("");
+                }
+            });
+
+            gradeFrame.add(courseBox);  gradeFrame.add(grade);
+
+            JOptionPane.showMessageDialog(gradeFrame,"All Selections Cleared..!");
         }catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
+            JOptionPane.showMessageDialog(gradeFrame,"Something is wrong");
         }
     }
 
@@ -344,10 +398,9 @@ public class UI {
             SortContents sortedContents = new SortContents(thSemester);
             sortedContents_2 = sortedContents;
             gradeInput(sortedContents);
-
         }
         catch (Exception e){
-            System.out.println(e);
+            //System.out.println(e);
             e.printStackTrace();
         }
     }
@@ -398,19 +451,19 @@ public class UI {
             frame.setVisible(false);
 
             if(currentFrame.equals("gradeFrame")){
-                currentFrame = "homeFrame";
+                clear();
                 gradeFrame.setVisible(false);
-                resultFrame.setVisible(false);
                 homeFrame.setVisible(true);
+                currentFrame = "homeFrame";
             }
             else if(currentFrame.equals("resultFrame")) {
-                currentFrame ="gradeFrame";
                 resultFrame.setVisible(false);
                 homeFrame.setVisible(false);
                 gradeFrame.setVisible(true);
+                currentFrame ="gradeFrame";
             }
         }catch(Exception e){
-            System.out.println(e);
+            //System.out.println(e);
             System.out.println("Current Frame : " + currentFrame);
             frame.setVisible(true);
         }

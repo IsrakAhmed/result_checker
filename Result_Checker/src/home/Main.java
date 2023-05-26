@@ -13,9 +13,9 @@ class Calculation {
     ArrayList<Double> gpa;
     ArrayList<Integer> courseCredits;
 
-    Calculation(Marks marks){
+    Calculation(SortContents sortedContents,Marks marks){
         gpa = marks.gpa;
-        courseCredits = SortContents.courseCredits;
+        courseCredits = sortedContents.courseCredits;
     }
 
     double calculateCGPA(){
@@ -29,11 +29,12 @@ class Calculation {
         for(int credit : courseCredits){
             total_credits = total_credits + credit;
         }
+
         for(int i = 0; i < courseCredits.size(); i++){
             double temp = courseCredits.get(i) * gpa.get(i);
             cgpa = cgpa + temp;
-
         }
+
         cgpa = cgpa / total_credits;  /* final line of calculation */
 
         return cgpa;
@@ -43,14 +44,12 @@ class Calculation {
 class Marks{
 
     ArrayList<Double> gpa = new ArrayList<>();
-    public static ArrayList<String> grades = new ArrayList<>();
-
-    SortContents sortedContents;
+    ArrayList<String> grades;
 
     /* getting obtained gpa based on grades */
 
-    Marks(SortContents sortedContents){
-        this.sortedContents = sortedContents;
+    Marks(ArrayList<String> grades){
+        this.grades = grades;
         convertGradesIntoGPA();
     }
 
@@ -103,7 +102,7 @@ class SortContents extends FileContents{
     /* sorting the contents of the file and adding only the required ones into new arrayLists */
 
     ArrayList<String> courseCodes = new ArrayList<>();
-    static ArrayList<Integer> courseCredits = new ArrayList<>();
+    ArrayList<Integer> courseCredits = new ArrayList<>();
 
     int thSemester;
 
